@@ -88,6 +88,29 @@ end
 #    method context.
 ```
 
+You can also pass arguments to the first block:
+
+```ruby
+unknown_block = proc do |arg1, arg2|
+end
+
+ReturnSafeYield.call_then_yield(unknown_block, 'arg1 value', 'arg2 value') do
+end
+```
+
+The second block receives the first block's return value as arguments (this
+does not apply if `return` is used explicitely):
+
+```ruby
+unknown_block = proc
+  'return value'
+end
+
+ReturnSafeYield.call_then_yield(unknown_block) do |arg1|
+  arg1 == 'return value' # => true
+end
+```
+
 ### Fail if block / proc contains `return`
 
 The second approach offered by this Gem is the method `safe_yield`. It makes
