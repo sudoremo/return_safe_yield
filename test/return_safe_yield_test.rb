@@ -47,4 +47,24 @@ class ReturnSafeYieldTest < Minitest::Test
 
     assert_equal 3, $count
   end
+
+  def test_safe_yield_with_return
+    $bad_proc = proc do |a, b|
+      assert_equal 'a', a
+      assert_equal 'b', b
+      return
+    end
+
+    def main
+      ReturnSafeYield.safe_yield($bad_proc, 'a', 'b')
+    end
+
+    assert_raises ReturnSafeYield::UnexpectedReturnException do
+      main
+    end
+  end
+
+  def test_safe_yield_without_return
+    assert_equal 'test', ReturnSafeYield.safe_yield(proc { 'test' })
+  end
 end
