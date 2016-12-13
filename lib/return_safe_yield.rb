@@ -20,11 +20,30 @@ module ReturnSafeYield
   #
   #   # => This line here might not be called however as the `return` statement
   #   #    exits the current method context.
-  def self.call_then_yield(first, &_second)
+  #
+  # You can also pass arguments to the first block:
+  #
+  #   unknown_block = proc do |arg1, arg2|
+  #   end
+  #
+  #   ReturnSafeYield.call_then_yield(unknown_block, 'arg1 value', 'arg2 value') do
+  #   end
+  #
+  # The second block receives the first block's return value as arguments (this
+  # does not apply if `return` is used explicitely):
+  #
+  #   unknown_block = proc
+  #     'return value'
+  #   end
+  #
+  #   ReturnSafeYield.call_then_yield(unknown_block) do |arg1|
+  #     arg1 == 'return value' # => true
+  #   end
+  def self.call_then_yield(first, *args, &_second)
     exception = false
     first_block_result = nil
     begin
-      first_block_result = first.call
+      first_block_result = first.call(*args)
     rescue
       exception = true
       fail
