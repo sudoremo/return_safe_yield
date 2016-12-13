@@ -1,6 +1,6 @@
 # return_safe_yield
 
-[![Gem Version](https://badge.fury.io/rbreturn_safe_yield.svg)](https://badge.fury.io/rb/return_safe_yield)
+[![Gem Version](https://badge.fury.io/rb/return_safe_yield.svg)](https://badge.fury.io/rb/return_safe_yield)
 
 [![Build Status](https://travis-ci.org/remofritzsche/return_safe_yield.svg?branch=master)](https://travis-ci.org/remofritzsche/return_safe_yield)
 
