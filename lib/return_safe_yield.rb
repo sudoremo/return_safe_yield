@@ -48,7 +48,12 @@ module ReturnSafeYield
       exception = true
       fail
     ensure
-      yield(*first_block_result) unless exception
+      unless exception
+        # In this very particular case, using `return` inside of `ensure`
+        # is fine as we're checking if there is an exception. There is no other
+        # way of returning the second block's result otherwise.
+        return yield(*first_block_result)
+      end
     end
   end
 

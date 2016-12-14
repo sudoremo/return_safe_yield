@@ -37,22 +37,45 @@ class ReturnSafeYieldTest < Minitest::Test
         assert_equal 'a', a
         assert_equal 'b', b
         $count += 1
+        'test'
       end
     end
 
-    foo do
+    result = foo do
       $count += 1
       next 'a', 'b'
     end
 
+    assert_equal 'test', result
+
     assert_equal 3, $count
+  end
+
+  def test_call_then_yield_with_exception_in_first_proc
+    block = proc do
+      fail 'Test'
+    end
+    assert_raises do
+      ReturnSafeYield.call_then_yield(block) do
+      end
+    end
+  end
+
+  def test_call_then_yield_with_exception_in_second_proc
+    block = proc do
+    end
+    assert_raises do
+      ReturnSafeYield.call_then_yield(block) do
+        fail
+      end
+    end
   end
 
   def test_safe_yield_with_return
     $bad_proc = proc do |a, b|
       assert_equal 'a', a
       assert_equal 'b', b
-      return
+      return 'bla'
     end
 
     def main
