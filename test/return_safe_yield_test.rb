@@ -19,11 +19,11 @@ class ReturnSafeYieldTest < Minitest::Test
       foo do |arg1|
         assert_equal 'arg1', arg1
         $count += 1
-        return
+        return 'foo'
       end
     end
 
-    main
+    assert_equal 'foo', main
 
     assert_equal 3, $count
   end

@@ -42,17 +42,22 @@ module ReturnSafeYield
   def self.call_then_yield(first, *args, &_second)
     exception = false
     first_block_result = nil
+    returned = true
     begin
       first_block_result = first.call(*args)
+      returned = false
+      return first_block_result
     rescue
       exception = true
       fail
     ensure
       unless exception
+        second_block_result = yield(*first_block_result)
+
         # In this very particular case, using `return` inside of `ensure`
         # is fine as we're checking if there is an exception. There is no other
         # way of returning the second block's result otherwise.
-        return yield(*first_block_result)
+        return second_block_result unless returned
       end
     end
   end
