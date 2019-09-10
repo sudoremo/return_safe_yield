@@ -47,7 +47,7 @@ module ReturnSafeYield
       first_block_result = first.call(*args)
       returned = false
       return first_block_result
-    rescue
+    rescue Exception
       exception = true
       fail
     ensure
@@ -83,7 +83,7 @@ module ReturnSafeYield
     result = block.call(*args, &cb)
     state = :regular
     return result
-  rescue
+  rescue Exception
     state = :exception
     fail
   ensure

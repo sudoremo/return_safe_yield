@@ -154,6 +154,16 @@ be a safe, welcoming space for collaboration, and contributors are expected to
 adhere to the [Contributor Covenant](http://contributor-covenant.org) code of
 conduct.
 
+## Changelog
+
+### 0.2.0
+
+* Rescue all exceptions inheriting from `Exception`
+
+### Until 0.1.3
+
+* Undocumented releases
+
 ## License
 
 The gem is available as open source under the terms of the [MIT
