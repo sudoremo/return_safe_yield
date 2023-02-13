@@ -28,6 +28,15 @@ class ReturnSafeYieldTest < Minitest::Test
     assert_equal 3, $count
   end
 
+  def test_array_return
+    assert_equal %i[foo bar], (ReturnSafeYield.call_then_yield(
+      ->() { %i[foo bar] },
+    ) do |args|
+      assert_equal %i[foo bar], args
+      next args
+    end)
+  end
+
   def test_call_then_yield_without_return
     $count = 0
 

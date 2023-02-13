@@ -156,6 +156,10 @@ conduct.
 
 ## Changelog
 
+### 0.2.1
+
+* Fix returning arrays (previously, only first element was returned)
+
 ### 0.2.0
 
 * Rescue all exceptions inheriting from `Exception`

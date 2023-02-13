@@ -52,7 +52,7 @@ module ReturnSafeYield
       fail
     ensure
       unless exception
-        second_block_result = yield(*first_block_result)
+        second_block_result = yield(first_block_result)
 
         # In this very particular case, using `return` inside of `ensure`
         # is fine as we're checking if there is an exception. There is no other
