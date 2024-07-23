@@ -156,6 +156,10 @@ conduct.
 
 ## Changelog
 
+### Unreleased
+
+* Update dev-dependencies to mitigate vulnerabilities
+
 ### 0.2.1
 
 * Fix returning arrays (previously, only first element was returned)
